@@ -37,40 +37,45 @@ type Book struct {
 	Genre  string             `bson:"genre,omitempty"`
 }
 
-func connect() (*mongo.Collection, context.Context, error) {
+type Database struct {
+	cl *mongo.Collection
+	ctx context.Context
+}
+
+func connect() (Database, error) {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
-		return nil, nil, err
+		return Database{}, err
 	}
 	ctx, _ := context.WithTimeout(context.Background(), time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
-		return nil, nil, err
+		return Database{}, err
 	}
 	//defer client.Disconnect(ctx)
 
 	inventory := client.Database("inventory").Collection("books")
-	return inventory, ctx, nil
+	return Database{inventory, ctx}, nil
 }
 
 // POST /books : Creates a new book.
-func create(b Book, db *mongo.Collection, ctx context.Context) error {
-	_, err := db.InsertOne(ctx, b)
+func (db Database) create(b Book) error {
+	_, err := db.cl.InsertOne(db.ctx, b)
 	return err
 }
 
 // PUT /book/{id}: Updates a book.
-func update(pmtr string, b Book, db *mongo.Collection, ctx context.Context) error {
+func (db Database) update(pmtr string, book Book) error {
 	id, _ := primitive.ObjectIDFromHex(pmtr)
-	_, err := db.UpdateOne(
-		ctx,
+	_, err := db.cl.UpdateOne(
+		db.ctx,
 		bson.M{"_id": id},
 		bson.M{
 			"$set": bson.M{
-				"name": b.Name,
-				"author": b.Author,
-				"ISBN": b.ISBN,
-				"genre": b.Genre,
+				"name": book.Name,
+				"author": book.Author,
+				"ISBN": book.ISBN,
+				"genre": book.Genre,
 			},
 		},
 	)
@@ -78,16 +83,16 @@ func update(pmtr string, b Book, db *mongo.Collection, ctx context.Context) erro
 }
 
 // GET /books: Returns a list of books in the store.
-func listAll(db *mongo.Collection, ctx context.Context) ([]*Book, error) {
+func (db Database) listAll() ([]*Book, error) {
 	var books []*Book
 	find := options.Find()
-	cur, err := db.Find(ctx, bson.D{}, find)
+	cur, err := db.cl.Find(db.ctx, bson.D{}, find)
 	if err != nil {
 		return nil, err
 	}
-	defer cur.Close(ctx)
+	defer cur.Close(db.ctx)
 
-	for cur.Next(ctx) {
+	for cur.Next(db.ctx) {
 		var elem Book
 		if err := cur.Decode(&elem); err != nil {
 			fmt.Println(err)
@@ -103,13 +108,13 @@ func listAll(db *mongo.Collection, ctx context.Context) ([]*Book, error) {
 }
 
 // GET /book/{id}: Returns the book with id = {id}
-func getBook(ID string, db *mongo.Collection, ctx context.Context) (*Book, error) {
+func (db Database) getBook(ID string) (*Book, error) {
 	var book *Book
 	id, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
 		log.Fatal(err)
 	}
-	cur := db.FindOne(ctx, bson.M{"_id": id})
+	cur := db.cl.FindOne(db.ctx, bson.M{"_id": id})
 	if err := cur.Decode(&book); err != nil {
 		log.Fatal(err)
 	}
@@ -117,17 +122,17 @@ func getBook(ID string, db *mongo.Collection, ctx context.Context) (*Book, error
 }
 
 // DELETE /book/{id}: Deletes the book with id = {id}
-func remove(ID string, db *mongo.Collection, ctx context.Context) {
+func (db Database) remove(ID string) {
 	id, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
 		log.Fatal(err)
 	}
-	db.FindOneAndDelete(ctx, bson.M{"_id": id})
+	db.cl.FindOneAndDelete(db.ctx, bson.M{"_id": id})
 }
 
 // DELETE /books: Deletes all books in the store
-func clearAll(db *mongo.Collection, ctx context.Context) error {
-	_, err := db.DeleteMany(ctx, bson.M{})
+func (db Database) clearAll() error {
+	_, err := db.cl.DeleteMany(db.ctx, bson.M{})
 	return err
 }
 
@@ -137,7 +142,7 @@ func status(w http.ResponseWriter, err int, string string) {
 }
 
 func books(w http.ResponseWriter, r *http.Request) {
-	db, ctx, err := connect()
+	db, err := connect()
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
 		return
@@ -151,10 +156,10 @@ func books(w http.ResponseWriter, r *http.Request) {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
 			w.WriteHeader(http.StatusCreated)
-			create(b, db, ctx)
+			db.create(b)
 		}
 	case "GET":
-		res, err := listAll(db, ctx)
+		res, err := db.listAll()
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
@@ -168,14 +173,14 @@ func books(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	case "DELETE":
-		clearAll(db, ctx)
+		db.clearAll()
 	default:
 		status(w, http.StatusNotFound, "404 not found")
 	}
 }
 
 func book(w http.ResponseWriter, r *http.Request) {
-	db, ctx, err := connect()
+	db, err := connect()
 	pmtr := strings.TrimPrefix(r.URL.Path, "/book/")
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
@@ -190,10 +195,10 @@ func book(w http.ResponseWriter, r *http.Request) {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
 			w.WriteHeader(http.StatusCreated)
-			update(pmtr, b, db, ctx)
+			db.update(pmtr, b)
 		}
 	case "GET":
-		b, _ := getBook(pmtr, db, ctx)
+		b, _ := db.getBook(pmtr)
 		temp, err := json.Marshal(*b)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
@@ -202,7 +207,7 @@ func book(w http.ResponseWriter, r *http.Request) {
 			w.Write(temp)
 		}
 	case "DELETE":
-		remove(pmtr, db, ctx)
+		db.remove(pmtr)
 	default:
 		status(w, http.StatusNotFound, "404 not found")
 	}
