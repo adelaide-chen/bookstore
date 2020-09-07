@@ -43,7 +43,7 @@ type Database struct {
 }
 
 func connect() (Database, error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://mongodb:27017"))
 	if err != nil {
 		return Database{}, err
 	}

@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,11 +42,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1h9mz6QlQRjDb12SegMeeQB0UL3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -52,7 +58,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Go Test.TestBookHandler/return_book_info_via_GET in bookstore_test.go">
+  <component name="RunManager" selected="Docker.Dockerfile">
     <configuration name="TestBookHandler/return_book_info_via_GET in bookstore_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="bookstore" />
       <working_directory value="$PROJECT_DIR$" />
@@ -73,6 +79,25 @@
       <pattern value="^\QTestBooksHandler\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="" />
+          <option name="buildCliOptions" value="" />
+          <option name="command" value="" />
+          <option name="containerName" value="" />
+          <option name="entrypoint" value="" />
+          <option name="commandLineOptions" value="" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="Go Test.TestBookHandler/return_book_info_via_GET in bookstore_test.go" />
+      <item itemvalue="Go Test.TestBooksHandler in bookstore_test.go" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.TestBookHandler/return_book_info_via_GET in bookstore_test.go" />
@@ -105,7 +130,18 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="839" y="220" key="#Docker" timestamp="1599452044353">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="839" y="220" key="#Docker/0.23.1792.1017@0.23.1792.1017" timestamp="1599452044353" />
+    <state x="704" y="193" width="1071" height="820" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599452155041">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="704" y="193" width="1071" height="820" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1599452155041" />
     <state width="1457" height="341" key="GridCell.Tab.0.bottom" timestamp="1599446655946">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
