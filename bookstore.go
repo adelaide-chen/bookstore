@@ -83,8 +83,8 @@ func (db Database) update(pmtr string, book Book) error {
 }
 
 // GET /books: Returns a list of books in the store.
-func (db Database) listAll() ([]*Book, error) {
-	var books []*Book
+func (db Database) listAll() ([]Book, error) {
+	var books []Book
 	find := options.Find()
 	cur, err := db.cl.Find(db.ctx, bson.D{}, find)
 	if err != nil {
@@ -97,7 +97,7 @@ func (db Database) listAll() ([]*Book, error) {
 		if err := cur.Decode(&elem); err != nil {
 			fmt.Println(err)
 		}
-		books = append(books, &elem)
+		books = append(books, elem)
 	}
 
 	if err := cur.Err(); err != nil {
@@ -108,8 +108,8 @@ func (db Database) listAll() ([]*Book, error) {
 }
 
 // GET /book/{id}: Returns the book with id = {id}
-func (db Database) getBook(ID string) (*Book, error) {
-	var book *Book
+func (db Database) getBook(ID string) (Book, error) {
+	var book Book
 	id, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
 		log.Fatal(err)
@@ -118,7 +118,7 @@ func (db Database) getBook(ID string) (*Book, error) {
 	if err := cur.Decode(&book); err != nil {
 		log.Fatal(err)
 	}
-	return book, err
+	return book, nil
 }
 
 // DELETE /book/{id}: Deletes the book with id = {id}
@@ -141,7 +141,7 @@ func status(w http.ResponseWriter, err int, string string) {
 	w.Write([]byte(string))
 }
 
-func books(w http.ResponseWriter, r *http.Request) {
+func booksHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := connect()
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
@@ -163,13 +163,11 @@ func books(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
-			for _, j := range res {
-				temp, err := json.Marshal(*j)
-				if err != nil {
-					status(w, http.StatusInternalServerError, err.Error())
-				} else {
-					w.Write(temp)
-				}
+			temp, err := json.Marshal(res)
+			if err != nil {
+				status(w, http.StatusInternalServerError, err.Error())
+			} else {
+				w.Write(temp)
 			}
 		}
 	case "DELETE":
@@ -179,9 +177,9 @@ func books(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func book(w http.ResponseWriter, r *http.Request) {
+func bookHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := connect()
-	pmtr := strings.TrimPrefix(r.URL.Path, "/book/")
+	bookId := strings.TrimPrefix(r.URL.Path, "/book/")
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
 		return
@@ -195,11 +193,14 @@ func book(w http.ResponseWriter, r *http.Request) {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
 			w.WriteHeader(http.StatusCreated)
-			db.update(pmtr, b)
+			db.update(bookId, b)
 		}
 	case "GET":
-		b, _ := db.getBook(pmtr)
-		temp, err := json.Marshal(*b)
+		b, err := db.getBook(bookId)
+		if err != nil {
+			status(w, http.StatusInternalServerError, err.Error())
+		}
+		temp, err := json.Marshal(b)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
@@ -207,14 +208,14 @@ func book(w http.ResponseWriter, r *http.Request) {
 			w.Write(temp)
 		}
 	case "DELETE":
-		db.remove(pmtr)
+		db.remove(bookId)
 	default:
 		status(w, http.StatusNotFound, "404 not found")
 	}
 }
 
 func main() {
-	http.HandleFunc("/books", books)
-	http.HandleFunc("/book/", book)
+	http.HandleFunc("/books", booksHandler)
+	http.HandleFunc("/book/", bookHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
