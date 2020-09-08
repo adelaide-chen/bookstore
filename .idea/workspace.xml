@@ -20,12 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/get_helm.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/.helmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/Chart.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/NOTES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/_helpers.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/hpa.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/ingress.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/serviceaccount.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/tests/test-connection.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore-helm/values.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,22 +154,22 @@
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
     <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1017@0.23.1792.1017" timestamp="1599500115696" />
-    <state width="1457" height="341" key="GridCell.Tab.0.bottom" timestamp="1599446655946">
+    <state width="1457" height="341" key="GridCell.Tab.0.bottom" timestamp="1599548070985">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1599446655946" />
-    <state width="1457" height="341" key="GridCell.Tab.0.center" timestamp="1599446655945">
+    <state width="1457" height="341" key="GridCell.Tab.0.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070985" />
+    <state width="1457" height="341" key="GridCell.Tab.0.center" timestamp="1599548070984">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.center/0.23.1792.1017@0.23.1792.1017" timestamp="1599446655945" />
-    <state width="1457" height="341" key="GridCell.Tab.0.left" timestamp="1599446655945">
+    <state width="1457" height="341" key="GridCell.Tab.0.center/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
+    <state width="1457" height="341" key="GridCell.Tab.0.left" timestamp="1599548070984">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.left/0.23.1792.1017@0.23.1792.1017" timestamp="1599446655945" />
-    <state width="1457" height="341" key="GridCell.Tab.0.right" timestamp="1599446655946">
+    <state width="1457" height="341" key="GridCell.Tab.0.left/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
+    <state width="1457" height="341" key="GridCell.Tab.0.right" timestamp="1599548070984">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599446655946" />
+    <state width="1457" height="341" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
     <state x="1166" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599539694940">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
