@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,18 +23,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/.helmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/Chart.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/NOTES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/_helpers.tpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/hpa.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/ingress.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/serviceaccount.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/tests/test-connection.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/values.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/queries.active" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/wal/00000000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/locust/loadTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prometheus.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHWFBEGE4JQ7WBDYQG4929XD/chunks/000001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHWFBEGE4JQ7WBDYQG4929XD/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHWFBEGE4JQ7WBDYQG4929XD/meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHWFBEGE4JQ7WBDYQG4929XD/tombstones" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF78WAC40TFGRA2AF44R9P/chunks/000001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF78WAC40TFGRA2AF44R9P/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF78WAC40TFGRA2AF44R9P/meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF78WAC40TFGRA2AF44R9P/tombstones" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF797V9TQNQYM7VBJJAR7P/chunks/000001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF797V9TQNQYM7VBJJAR7P/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF797V9TQNQYM7VBJJAR7P/meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF797V9TQNQYM7VBJJAR7P/tombstones" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF79PK3GQ4EQW2E08BGX1C/chunks/000001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF79PK3GQ4EQW2E08BGX1C/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF79PK3GQ4EQW2E08BGX1C/meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/01EHXF79PK3GQ4EQW2E08BGX1C/tombstones" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/queries.active" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/wal/00000017" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/wal/00000018" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/wal/00000019" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/wal/00000020" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp/wal/checkpoint.00000016/00000000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tempMove/00000012" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tempMove/00000013" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tempMove/00000014" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tempMove/00000015" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tempMove/checkpoint.00000011/00000000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bookstore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bookstore.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +79,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+    <option name="namespace" value="default" />
+  </component>
   <component name="ProjectId" id="1h9mz6QlQRjDb12SegMeeQB0UL3" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -62,11 +96,23 @@
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="go" />
   </component>
-  <component name="RunManager" selected="Docker.Dockerfile">
+  <component name="RunManager" selected="Go Build.go build bookstore.go">
+    <configuration name="go build bookstore.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bookstore" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bookstore.go" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestBookHandler/return_book_info_via_GET in bookstore_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="bookstore" />
       <working_directory value="$PROJECT_DIR$" />
@@ -105,9 +151,11 @@
       <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Go Test.TestBookHandler/return_book_info_via_GET in bookstore_test.go" />
       <item itemvalue="Go Test.TestBooksHandler in bookstore_test.go" />
+      <item itemvalue="Go Build.go build bookstore.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build bookstore.go" />
         <item itemvalue="Go Test.TestBookHandler/return_book_info_via_GET in bookstore_test.go" />
         <item itemvalue="Go Test.TestBooksHandler in bookstore_test.go" />
       </list>
@@ -137,6 +185,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -150,29 +199,64 @@
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
     <state x="704" y="193" width="1071" height="820" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1599452155041" />
-    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599500115696">
+    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599761577165">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1017@0.23.1792.1017" timestamp="1599500115696" />
-    <state width="1457" height="341" key="GridCell.Tab.0.bottom" timestamp="1599548070985">
+    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1017@0.23.1792.1017" timestamp="1599761577165" />
+    <state x="1049" y="292" key="FileChooserDialogImpl" timestamp="1599608404900">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070985" />
-    <state width="1457" height="341" key="GridCell.Tab.0.center" timestamp="1599548070984">
+    <state x="1049" y="292" key="FileChooserDialogImpl/0.23.1792.1017@0.23.1792.1017" timestamp="1599608404900" />
+    <state width="828" height="664" key="GridCell.Tab.0.bottom" timestamp="1599686858436">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.center/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
-    <state width="1457" height="341" key="GridCell.Tab.0.left" timestamp="1599548070984">
+    <state width="828" height="664" key="GridCell.Tab.0.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858436" />
+    <state width="828" height="664" key="GridCell.Tab.0.center" timestamp="1599686858436">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.left/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
-    <state width="1457" height="341" key="GridCell.Tab.0.right" timestamp="1599548070984">
+    <state width="828" height="664" key="GridCell.Tab.0.center/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858436" />
+    <state width="828" height="664" key="GridCell.Tab.0.left" timestamp="1599686858436">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
-    <state width="1457" height="341" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599548070984" />
+    <state width="828" height="664" key="GridCell.Tab.0.left/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858436" />
+    <state width="828" height="664" key="GridCell.Tab.0.right" timestamp="1599686858436">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state width="828" height="664" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858436" />
+    <state width="828" height="664" key="GridCell.Tab.1.bottom" timestamp="1599686858438">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state width="828" height="664" key="GridCell.Tab.1.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858438" />
+    <state width="828" height="664" key="GridCell.Tab.1.center" timestamp="1599686858437">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state width="828" height="664" key="GridCell.Tab.1.center/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858437" />
+    <state width="828" height="664" key="GridCell.Tab.1.left" timestamp="1599686858437">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state width="828" height="664" key="GridCell.Tab.1.left/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858437" />
+    <state width="828" height="664" key="GridCell.Tab.1.right" timestamp="1599686858438">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state width="828" height="664" key="GridCell.Tab.1.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599686858438" />
+    <state x="763" y="170" key="SettingsEditor" timestamp="1599788732689">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="763" y="170" key="SettingsEditor/0.23.1792.1017@0.23.1792.1017" timestamp="1599788732689" />
     <state x="1166" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599539694940">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
     <state x="1166" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1017@0.23.1792.1017" timestamp="1599539694940" />
+    <state x="914" y="248" width="670" height="676" key="search.everywhere.popup" timestamp="1599688011655">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="914" y="248" width="670" height="676" key="search.everywhere.popup/0.23.1792.1017@0.23.1792.1017" timestamp="1599688011655" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="metrics" language="go" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -1,24 +1,12 @@
-//{
-//"id": "auto_generated_id",
-//"name": "Harry Potter and the Prisoner of Azkaban",
-//"author": "J K Rowling",
-//"ISBN": "134238982734",
-//"genre": "fantasy"
-//}
-
-// POST /books : Creates a new book.
-// PUT /book/{id}: Updates a book.
-// GET /books: Returns a list of books in the store.
-// GET /book/{id}: Returns the book with id = {id}
-// DELETE /book/{id}: Deletes the book with id = {id}
-// DELETE /books: Deletes all books in the store
-
 package main
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/prometheus/client_golang/prometheus"
+	//"github.com/prometheus/client_golang/prometheus/promauto"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -39,9 +27,34 @@ type Book struct {
 }
 
 type Database struct {
-	cl *mongo.Collection
+	cl  *mongo.Collection
 	ctx context.Context
 }
+
+type Server struct {
+	start time.Time
+	waitDuration time.Duration
+}
+
+var numberRequests = prometheus.NewCounterVec(
+	prometheus.CounterOpts{
+		Name: "_bookstore_requests_served_total",
+		Help: "Counts number of total requests",
+	},
+	[]string{"code"},
+	// CPU usage query: rate(node_cpu_seconds_total{mode="user"}[1m])
+	// Memory usage query: node_memory_active_bytes
+)
+
+var bookMetrics = prometheus.NewGaugeVec(
+	prometheus.GaugeOpts{
+		Namespace: "idk",
+		Subsystem: "idk",
+		Name: "_bookstore_application",
+		Help: "Keeps track of number of books of genre and total",
+	},
+	[]string{"genre"},
+)
 
 func connect() (Database, error) {
 	uri := fmt.Sprintf("mongodb://%s:27017", os.Getenv("DB"))
@@ -86,7 +99,7 @@ func (db Database) update(pmtr string, book Book) error {
 
 // GET /books: Returns a list of books in the store.
 func (db Database) listAll() ([]Book, error) {
-	var books []Book
+	var books = make([]Book, 0)
 	find := options.Find()
 	cur, err := db.cl.Find(db.ctx, bson.D{}, find)
 	if err != nil {
@@ -147,6 +160,7 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := connect()
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
+		numberRequests.WithLabelValues("500").Inc()
 		return
 	}
 	w.Header().Set("content-type", "application/json")
@@ -156,26 +170,40 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 		err := json.NewDecoder(r.Body).Decode(&b)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+			numberRequests.WithLabelValues("500").Inc()
 		} else {
 			w.WriteHeader(http.StatusCreated)
+			w.Write([]byte("Success"))
+			numberRequests.WithLabelValues("201").Inc()
+			bookMetrics.WithLabelValues(b.Genre).Inc()
 			db.create(b)
 		}
 	case "GET":
 		res, err := db.listAll()
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+			numberRequests.WithLabelValues("500").Inc()
+		} else if res == nil {
+			w.Write([]byte(""))
+			numberRequests.WithLabelValues("200").Inc()
 		} else {
 			temp, err := json.Marshal(res)
 			if err != nil {
 				status(w, http.StatusInternalServerError, err.Error())
+				numberRequests.WithLabelValues("500").Inc()
 			} else {
 				w.Write(temp)
+				numberRequests.WithLabelValues("200").Inc()
 			}
 		}
 	case "DELETE":
+		w.Write([]byte("Success"))
+		numberRequests.WithLabelValues("200").Inc()
+		bookMetrics.Reset()
 		db.clearAll()
 	default:
 		status(w, http.StatusNotFound, "404 not found")
+		numberRequests.WithLabelValues("404").Inc()
 	}
 }
 
@@ -184,6 +212,7 @@ func bookHandler(w http.ResponseWriter, r *http.Request) {
 	bookId := strings.TrimPrefix(r.URL.Path, "/book/")
 	if err != nil {
 		status(w, http.StatusInternalServerError, err.Error())
+		numberRequests.WithLabelValues("500").Inc()
 		return
 	}
 	w.Header().Set("content-type", "application/json")
@@ -193,31 +222,66 @@ func bookHandler(w http.ResponseWriter, r *http.Request) {
 		err := json.NewDecoder(r.Body).Decode(&b)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+			numberRequests.WithLabelValues("500").Inc()
 		} else {
 			w.WriteHeader(http.StatusCreated)
+			w.Write([]byte("Success"))
+			numberRequests.WithLabelValues("201").Inc()
 			db.update(bookId, b)
 		}
 	case "GET":
 		b, err := db.getBook(bookId)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+			numberRequests.WithLabelValues("500").Inc()
 		}
 		temp, err := json.Marshal(b)
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+			numberRequests.WithLabelValues("500").Inc()
 		} else {
 			w.WriteHeader(http.StatusOK)
+			numberRequests.WithLabelValues("200").Inc()
 			w.Write(temp)
 		}
 	case "DELETE":
+		w.Write([]byte("Success"))
+		numberRequests.WithLabelValues("200").Inc()
+		book, _ := db.getBook(bookId)
+		bookMetrics.WithLabelValues(book.Genre).Dec()
 		db.remove(bookId)
 	default:
 		status(w, http.StatusNotFound, "404 not found")
+		numberRequests.WithLabelValues("404").Inc()
 	}
 }
 
+//func (s *Server) livenessProbe(w http.ResponseWriter, r *http.Request) {
+//	if time.Since(s.start) > s.waitDuration {
+//		w.WriteHeader(http.StatusOK)
+//	} else {
+//		w.WriteHeader(http.StatusServiceUnavailable)
+//	}
+//}
+//
+//func (s *Server) readinessProbe(w http.ResponseWriter, r *http.Request) {
+//	if time.Since(s.start) > s.waitDuration {
+//		w.WriteHeader(http.StatusOK)
+//	} else {
+//		w.WriteHeader(http.StatusServiceUnavailable)
+//	}
+//}
+
 func main() {
+	//var server Server
+	//server.start = time.Now()
+	//server.waitDuration = 150
+	prometheus.MustRegister(numberRequests)
+	prometheus.MustRegister(bookMetrics)
 	http.HandleFunc("/books", booksHandler)
 	http.HandleFunc("/book/", bookHandler)
+	http.Handle("/metrics", promhttp.Handler())
+	//http.HandleFunc("/liveness", server.livenessProbe)
+	//http.HandleFunc("/readiness", server.readinessProbe)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,10 +10,19 @@ import (
 	"testing"
 )
 
-var bookID string
+var globalBookID string
+
+var globalMockBook = Book{
+	Name: "Harry Potter and the Prisoner of Azkaban",
+	Author: "J K Rowling",
+	ISBN: "134238982734",
+	Genre: "fantasy",
+}
 
 func TestBooksHandler(t *testing.T) {
-	rawInput := `{"Name": "Harry Potter and the Prisoner of Azkaban","Author": "J K Rowling","ISBN": "134238982734","Genre": "fantasy"}`
+	convert, _ := json.Marshal(globalMockBook)
+	rawInput := bytes.NewBuffer(convert)
+	//rawInput := `{"Name": "Harry Potter and the Prisoner of Azkaban","Author": "J K Rowling","ISBN": "134238982734","Genre": "fantasy"}`
 	t.Run("deletes all books via DELETE", func(t *testing.T) {
 		req := httptest.NewRequest("DELETE", "https://localhost:8080", nil)
 		res := httptest.NewRecorder()
@@ -24,8 +34,7 @@ func TestBooksHandler(t *testing.T) {
 		}
 	})
 	t.Run("creates a new book via POST", func(t *testing.T) {
-		input := strings.NewReader(rawInput)
-		req := httptest.NewRequest("POST", "https://localhost:8080", input)
+		req := httptest.NewRequest("POST", "https://localhost:8080", rawInput)
 		res := httptest.NewRecorder()
 
 		booksHandler(res, req)
@@ -46,7 +55,7 @@ func TestBooksHandler(t *testing.T) {
 			var books []Book
 			_ = json.NewDecoder(res.Body).Decode(&books)
 			if len(books) == 1 {
-				bookID = books[0].ID.Hex()
+				globalBookID = books[0].ID.Hex()
 				fmt.Println(books)
 				fmt.Println(rawInput)
 			}
@@ -56,7 +65,7 @@ func TestBooksHandler(t *testing.T) {
 }
 
 func TestBookHandler (t *testing.T) {
-	url := fmt.Sprintf("https://localhost:8080/book/%s", bookID)
+	url := fmt.Sprintf("https://localhost:8080/book/%s", globalBookID)
 
 	t.Run("updates book via PUT", func(t *testing.T) {
 		input := strings.NewReader(`{"name": "another one","author": "J K Rowling","ISBN": "134238982734","genre": "fantasy"}`)
