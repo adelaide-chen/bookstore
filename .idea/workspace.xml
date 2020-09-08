@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/get_helm.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
     </list>
@@ -142,6 +144,10 @@
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
     <state x="704" y="193" width="1071" height="820" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1599452155041" />
+    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599500115696">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="826" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1017@0.23.1792.1017" timestamp="1599500115696" />
     <state width="1457" height="341" key="GridCell.Tab.0.bottom" timestamp="1599446655946">
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
@@ -158,5 +164,9 @@
       <screen x="0" y="23" width="1792" height="1017" />
     </state>
     <state width="1457" height="341" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1599446655946" />
+    <state x="1166" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599539694940">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="1166" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1017@0.23.1792.1017" timestamp="1599539694940" />
   </component>
 </project>

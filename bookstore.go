@@ -25,6 +25,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -43,7 +44,8 @@ type Database struct {
 }
 
 func connect() (Database, error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://mongodb:27017"))
+	uri := fmt.Sprintf("mongodb://%s:27017", os.Getenv("DB"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
 	if err != nil {
 		return Database{}, err
 	}
