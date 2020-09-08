@@ -20,18 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/.helmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/Chart.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/NOTES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/_helpers.tpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/hpa.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/ingress.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/serviceaccount.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/templates/tests/test-connection.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore-helm/values.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/bookstore.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +42,10 @@
   <component name="GOROOT" path="$USER_HOME$/go/go1.15.1" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+    <option name="namespace" value="default" />
   </component>
   <component name="ProjectId" id="1h9mz6QlQRjDb12SegMeeQB0UL3" />
   <component name="ProjectLevelVcsManager">
@@ -137,6 +135,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

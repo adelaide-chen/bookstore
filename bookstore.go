@@ -39,8 +39,13 @@ type Book struct {
 }
 
 type Database struct {
-	cl *mongo.Collection
+	cl  *mongo.Collection
 	ctx context.Context
+}
+
+type Server struct {
+	start time.Time
+	waitDuration time.Duration
 }
 
 func connect() (Database, error) {
@@ -86,7 +91,7 @@ func (db Database) update(pmtr string, book Book) error {
 
 // GET /books: Returns a list of books in the store.
 func (db Database) listAll() ([]Book, error) {
-	var books []Book
+	var books = make([]Book, 0)
 	find := options.Find()
 	cur, err := db.cl.Find(db.ctx, bson.D{}, find)
 	if err != nil {
@@ -158,12 +163,15 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
 			w.WriteHeader(http.StatusCreated)
+			w.Write([]byte("Success"))
 			db.create(b)
 		}
 	case "GET":
 		res, err := db.listAll()
 		if err != nil {
 			status(w, http.StatusInternalServerError, err.Error())
+		} else if res == nil {
+			w.Write([]byte(""))
 		} else {
 			temp, err := json.Marshal(res)
 			if err != nil {
@@ -173,6 +181,7 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	case "DELETE":
+		w.Write([]byte("Success"))
 		db.clearAll()
 	default:
 		status(w, http.StatusNotFound, "404 not found")
@@ -195,6 +204,7 @@ func bookHandler(w http.ResponseWriter, r *http.Request) {
 			status(w, http.StatusInternalServerError, err.Error())
 		} else {
 			w.WriteHeader(http.StatusCreated)
+			w.Write([]byte("Success"))
 			db.update(bookId, b)
 		}
 	case "GET":
@@ -210,14 +220,37 @@ func bookHandler(w http.ResponseWriter, r *http.Request) {
 			w.Write(temp)
 		}
 	case "DELETE":
+		w.Write([]byte("Success"))
 		db.remove(bookId)
 	default:
 		status(w, http.StatusNotFound, "404 not found")
 	}
 }
 
+func (s *Server) livenessProbe(w http.ResponseWriter, r *http.Request) {
+	if time.Since(s.start) > s.waitDuration {
+		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader(http.StatusServiceUnavailable)
+	}
+}
+
+func (s *Server) readinessProbe(w http.ResponseWriter, r *http.Request) {
+	if time.Since(s.start) > s.waitDuration {
+		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader(http.StatusServiceUnavailable)
+	}
+}
+
 func main() {
+	var server Server
+	server.start = time.Now()
+	server.waitDuration = 150
 	http.HandleFunc("/books", booksHandler)
 	http.HandleFunc("/book/", bookHandler)
+	http.HandleFunc("/liveness", server.livenessProbe)
+	http.HandleFunc("/readiness", server.readinessProbe)
+
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
