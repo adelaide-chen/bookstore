@@ -26,7 +26,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['localhost:9090', 'localhost:3000']
 
   - job_name: 'bookstore'
     static_configs:
