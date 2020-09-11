@@ -26,18 +26,20 @@ spec:
             httpGet:
               path: /liveness
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 10
+
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 18
           readinessProbe:
             httpGet:
               path: /readiness
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 10
+
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 18
 

@@ -23,6 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62227872-ba46-4008-95e6-965849d43fe2" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/data/lock" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/queries.active" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/wal/00000000" afterDir="false" />
@@ -62,6 +63,14 @@
       <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/bookstore.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/bookstore.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore-helm/templates/deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore_test.go" afterDir="false" />
+>>>>>>> 686e3674980b1efb5e964d508f1259c8e7907c08
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

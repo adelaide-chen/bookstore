@@ -186,6 +186,8 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 		} else if res == nil {
 			w.Write([]byte(""))
 			numberRequests.WithLabelValues("200").Inc()
+		} else if res == nil {
+			w.Write([]byte(""))
 		} else {
 			temp, err := json.Marshal(res)
 			if err != nil {
