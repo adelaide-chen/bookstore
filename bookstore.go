@@ -32,7 +32,7 @@ type Database struct {
 }
 
 type Server struct {
-	start time.Time
+	start        time.Time
 	waitDuration time.Duration
 }
 
@@ -50,8 +50,8 @@ var bookMetrics = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Namespace: "idk",
 		Subsystem: "idk",
-		Name: "_bookstore_application",
-		Help: "Keeps track of number of books of genre and total",
+		Name:      "_bookstore_application",
+		Help:      "Keeps track of number of books of genre and total",
 	},
 	[]string{"genre"},
 )
@@ -74,27 +74,29 @@ func connect() (Database, error) {
 }
 
 // POST /books : Creates a new book.
-func (db Database) create(b Book) error {
-	_, err := db.cl.InsertOne(db.ctx, b)
-	return err
+func (db Database) create(b Book) (Book, error) {
+	result, err := db.cl.InsertOne(db.ctx, b)
+	entry, _ := db.getBook(result.InsertedID.(primitive.ObjectID).Hex())
+	return entry, err
 }
 
 // PUT /book/{id}: Updates a book.
-func (db Database) update(pmtr string, book Book) error {
+func (db Database) update(pmtr string, book Book) (Book, error) {
 	id, _ := primitive.ObjectIDFromHex(pmtr)
 	_, err := db.cl.UpdateOne(
 		db.ctx,
 		bson.M{"_id": id},
 		bson.M{
 			"$set": bson.M{
-				"name": book.Name,
+				"name":   book.Name,
 				"author": book.Author,
-				"ISBN": book.ISBN,
-				"genre": book.Genre,
+				"ISBN":   book.ISBN,
+				"genre":  book.Genre,
 			},
 		},
 	)
-	return err
+	result, _ := db.getBook(pmtr)
+	return result, err
 }
 
 // GET /books: Returns a list of books in the store.
@@ -164,6 +166,7 @@ func booksHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	switch r.Method {
 	case "POST":
 		var b Book
@@ -218,6 +221,7 @@ func bookHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	switch r.Method {
 	case "PUT":
 		var b Book

@@ -13,10 +13,10 @@ import (
 var globalBookID string
 
 var globalMockBook = Book{
-	Name: "Harry Potter and the Prisoner of Azkaban",
+	Name:   "Harry Potter and the Prisoner of Azkaban",
 	Author: "J K Rowling",
-	ISBN: "134238982734",
-	Genre: "fantasy",
+	ISBN:   "134238982734",
+	Genre:  "fantasy",
 }
 
 func TestBooksHandler(t *testing.T) {
@@ -64,7 +64,7 @@ func TestBooksHandler(t *testing.T) {
 	})
 }
 
-func TestBookHandler (t *testing.T) {
+func TestBookHandler(t *testing.T) {
 	url := fmt.Sprintf("https://localhost:8080/book/%s", globalBookID)
 
 	t.Run("updates book via PUT", func(t *testing.T) {
@@ -101,4 +101,3 @@ func TestBookHandler (t *testing.T) {
 		}
 	})
 }
-
